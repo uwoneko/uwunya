@@ -7,17 +7,18 @@
     <title>uwu</title>
     <link rel="stylesheet" href="../public/output.css">
 </head>
-<body class="bg-zinc-900 text-white h-screen w-screen">
-    <div class="w-screen h-screen absolute inset-0 z-0">
+<body class="bg-zinc-900 text-white h-scrposteen">
+    <div class="w-screen h-screen fixed inset-0 z-0">
         <picture>
             <source srcset="../public/bg.png" type="image/apng">
             <img src="../public/bg.gif" alt="" class="w-full h-full object-cover contrast-[1.1]" style="image-rendering: pixelated">
         </picture>
     </div>
-    <div class="absolute h-screen w-screen p-4 space-y-4 z-10">
-        <header class="bg-zinc-800 sticky top-0 p-3 px-4 flex flex-row rounded-xl shadow-lg">
+    <div class="absolute h-screen w-screen p-4 space-y-4 z-10 flex flex-col">
+        <header class="bg-zinc-800 sticky top-0 p-3 px-4 flex flex-row rounded-xl shadow-lg space-x-4">
             <div class="grow font-bold">uwunya</div>
-            <div>kots</div>
+            <div class="hover:underline">nothing</div>
+            <div class="hover:underline">more nothing</div>
         </header>
         <div class="flex flex-row space-x-4">
             <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit">
@@ -27,6 +28,9 @@
             <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit">
                 i like {{ likes }}<br>
                 currently working on {{ working_on }}
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit flex flex-col justify-center">
+                email: contact@uwunya.org
             </div>
         </div>
         <!--
@@ -40,6 +44,9 @@
             </div>
         </div>
         -->
+        <div class="flex-grow flex flex-col justify-end items-center">
+            this site has no js&nbsp;&nbsp;•&nbsp;&nbsp;axum + askama + tailwind&nbsp;&nbsp;•&nbsp;&nbsp;made with nyas
+        </div>
     </div>
 </body>
 </html>
