@@ -79,7 +79,8 @@ pub async fn start_motd_timer() {
 
 #[derive(Deserialize, Debug)]
 pub struct Config {
-    pub admin_password: Box<str>
+    pub admin_password: Box<str>,
+    pub port: u16
 }
 
 pub static CONFIG: LazyLock<Config> = LazyLock::new(|| parse_toml("./config.toml").expect("could not load config.toml"));

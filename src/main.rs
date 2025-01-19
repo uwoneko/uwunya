@@ -3,6 +3,7 @@ mod admin;
 
 use axum_macros::debug_handler;
 use std::convert::Into;
+use std::net::SocketAddr;
 use std::sync::{Arc, LazyLock};
 use askama_axum::{Template};
 use axum::{response::Html, routing::get, Extension, Router};
@@ -25,7 +26,7 @@ async fn main() {
         .route("/", get(index))
         .nest("/admin", admin::routes());
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    let listener = tokio::net::TcpListener::bind(SocketAddr::from(([127, 0, 0, 1], CONFIG.port)))
         .await
         .unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
