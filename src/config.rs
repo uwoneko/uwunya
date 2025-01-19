@@ -2,20 +2,27 @@ use std::fs;
 use std::sync::{Arc, LazyLock};
 use notify::{recommended_watcher, Event, EventKind, RecommendedWatcher, RecursiveMode, Watcher};
 use o2o::o2o;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use tokio::sync::{Mutex, RwLock, RwLockReadGuard};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Messages {
     pub motds: Vec<Arc<str>>,
     pub likes: Arc<str>,
     pub working_on: Arc<str>
 }
 
-pub fn parse_toml<T: std::fmt::Debug + for<'de> Deserialize<'de>>(
+pub fn parse_toml<T: for<'de> Deserialize<'de>>(
     path: &'static str
 ) -> anyhow::Result<T> {
-    dbg!(toml::from_str(&fs::read_to_string(path)?).map_err(|e| e.into()))
+    toml::from_str(&fs::read_to_string(path)?).map_err(|e| e.into())
+}
+
+pub fn write_toml<T: Serialize>(
+    path: &'static str,
+    data: &T
+) -> anyhow::Result<()> {
+    Ok(fs::write(path, toml::to_string_pretty(data)?)?)
 }
 
 pub static MESSAGES: LazyLock<RwLock<Messages>> = LazyLock::new(|| RwLock::new(parse_toml("./messages.toml").expect("could not load messages.toml")));

@@ -6,24 +6,24 @@
     <title>admin panel</title>
 </head>
 <body>
-    <form action="/admin/new_motd">
+    <form action="/admin/add-motd">
         <label>
             add new motd<br>
-            <input type="text" name="data"><br>
+            <input type="text" name="motd"><br>
         </label>
         <input type="submit" value="submit"><br>
     </form>
-    <form action="/admin/set_likes">
+    <form action="/admin/set-likes">
         <label>
             set likes<br>
-            <input type="text" name="data" value="{{ likes }}"><br>
+            <input type="text" name="likes" value="{{ likes }}"><br>
         </label>
         <input type="submit" value="submit"><br>
     </form>
-    <form action="/admin/set_working_on">
+    <form action="/admin/set-working-on">
         <label>
             set working on<br>
-            <input type="text" name="data" value="{{ working_on }}"><br>
+            <input type="text" name="working_on" value="{{ working_on }}"><br>
         </label>
         <input type="submit" value="submit"><br>
     </form>
