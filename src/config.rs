@@ -12,17 +12,19 @@ pub struct Messages {
     pub working_on: Arc<str>
 }
 
-pub fn load_messages() -> anyhow::Result<Messages> {
-    dbg!(toml::from_str(&fs::read_to_string("./messages.toml")?).map_err(|e| e.into()))
+pub fn parse_toml<T: std::fmt::Debug + for<'de> Deserialize<'de>>(
+    path: &'static str
+) -> anyhow::Result<T> {
+    dbg!(toml::from_str(&fs::read_to_string(path)?).map_err(|e| e.into()))
 }
 
-pub static MESSAGES: LazyLock<RwLock<Messages>> = LazyLock::new(|| RwLock::new(load_messages().expect("could not load messages.toml")));
+pub static MESSAGES: LazyLock<RwLock<Messages>> = LazyLock::new(|| RwLock::new(parse_toml("./messages.toml").expect("could not load messages.toml")));
 
 fn watch_event(event: notify::Result<Event>) {
     let Ok(event) = event else { return };
     
     if matches!(event.kind, EventKind::Modify(..) | EventKind::Create(..)) {
-        *MESSAGES.blocking_write() = load_messages().expect("could not update messages.toml");
+        *MESSAGES.blocking_write() = parse_toml("./messages.toml").expect("could not update messages.toml");
     }
 }
 
@@ -31,3 +33,10 @@ pub fn start_watching() {
     watcher.watch("./messages.toml".as_ref(), RecursiveMode::NonRecursive).expect("could not start watching ./messages.toml");
     Box::leak(watcher);
 }
+
+#[derive(Deserialize, Debug)]
+pub struct Config {
+    pub admin_password: Box<str>
+}
+
+pub static CONFIG: LazyLock<Config> = LazyLock::new(|| parse_toml("./config.toml").expect("could not load config.toml"));

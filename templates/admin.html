@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin panel</title>
+</head>
+<body>
+    <form action="/admin/new_motd">
+        <label>
+            add new motd<br>
+            <input type="text" name="data"><br>
+        </label>
+        <input type="submit" value="submit"><br>
+    </form>
+    <form action="/admin/set_likes">
+        <label>
+            set likes<br>
+            <input type="text" name="data" value="{{ likes }}"><br>
+        </label>
+        <input type="submit" value="submit"><br>
+    </form>
+    <form action="/admin/set_working_on">
+        <label>
+            set working on<br>
+            <input type="text" name="data" value="{{ working_on }}"><br>
+        </label>
+        <input type="submit" value="submit"><br>
+    </form>
+</body>
+</html>
