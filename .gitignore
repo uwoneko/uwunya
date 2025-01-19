@@ -2,3 +2,5 @@
 /.idea
 /public/output.css
 config.toml
+backups
+messages.toml

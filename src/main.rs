@@ -13,11 +13,12 @@ use o2o::o2o;
 use serde::{Deserialize, Serialize};
 use subtle::ConstantTimeEq;
 use tower_http::services::ServeDir;
-use crate::config::{parse_toml, start_watching, Messages, CONFIG, MESSAGES};
+use crate::config::{parse_toml, start_motd_timer, start_watching, Messages, CONFIG, MESSAGES};
 
 #[tokio::main]
 async fn main() {
     start_watching();
+    start_motd_timer().await;
     
     let app = Router::new()
         .nest_service("/public", ServeDir::new("./public"))
@@ -42,7 +43,7 @@ struct IndexTemplate {
 async fn index() -> Html<Box<str>> {
     let messages = MESSAGES.read().await;
     let template = IndexTemplate {
-        motd: messages.motds[0].clone(),
+        motd: messages.motds[messages.current_motd].clone(),
         likes: messages.likes.clone(),
         working_on: messages.working_on.clone(),
     };
