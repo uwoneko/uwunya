@@ -6,30 +6,31 @@
     <meta name="description" content="uwu nya">
     <title>uwu</title>
     <link rel="stylesheet" href="../public/output.css">
+    <link rel="preload" href="../public/output.css" as="style">
 </head>
-<body class="bg-zinc-900 text-white h-scrposteen">
+<body class="bg-zinc-900 text-white h-screen w-screen">
     <div class="w-screen h-screen fixed inset-0 z-0">
         <picture>
             <source srcset="../public/bg.png" type="image/apng">
             <img src="../public/bg.gif" alt="" class="w-full h-full object-cover contrast-[1.1]" style="image-rendering: pixelated">
         </picture>
     </div>
-    <div class="absolute h-screen w-screen p-4 space-y-4 z-10 flex flex-col">
+    <div class="absolute h-dvh w-dvw p-4 space-y-4 z-10 flex flex-col">
         <header class="bg-zinc-800 sticky top-0 p-3 px-4 flex flex-row rounded-xl shadow-lg space-x-4">
             <div class="grow font-bold">uwunya</div>
             <div class="hover:underline">nothing</div>
             <div class="hover:underline">more nothing</div>
         </header>
-        <div class="flex flex-row space-x-4">
-            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit">
+        <div class="flex flex-row space-x-4 overflow-x-auto">
+            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit shrink-0 whitespace-nowrap">
                 <div class="text-xl">{{ motd }}</div>
                 its raining
             </div>
-            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit">
+            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit shrink-0 whitespace-nowrap">
                 i like {{ likes }}<br>
                 currently working on {{ working_on }}
             </div>
-            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit flex flex-col justify-center">
+            <div class="bg-white/10 backdrop-blur rounded-lg p-3 shadow-lg w-fit flex flex-col justify-center shrink-0 whitespace-nowrap">
                 email: contact@uwunya.org
             </div>
         </div>
