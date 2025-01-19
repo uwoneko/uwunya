@@ -5,14 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin panel</title>
 </head>
-<body>
-    <form action="/admin/add-motd">
-        <label>
-            add new motd<br>
-            <input type="text" name="motd"><br>
-        </label>
-        <input type="submit" value="submit"><br>
-    </form>
+<body class="p-4">
     <form action="/admin/set-likes">
         <label>
             set likes<br>
@@ -20,6 +13,7 @@
         </label>
         <input type="submit" value="submit"><br>
     </form>
+    <br>
     <form action="/admin/set-working-on">
         <label>
             set working on<br>
@@ -27,5 +21,37 @@
         </label>
         <input type="submit" value="submit"><br>
     </form>
+    <br>
+    <form action="/admin/motd/new">
+        <label>
+            add new motd<br>
+            <input type="text" name="motd"><br>
+        </label>
+        <input type="submit" value="submit"><br>
+    </form>
+    <br>
+    motds:
+    <ul>
+        {% for (index, motd) in motds.iter().enumerate().rev() %}
+        <li>
+            <div style="display: flex">
+                <form action="/admin/motd/{{index}}/edit" style="display: flex; flex-grow: 1">
+                    <!--suppress HtmlFormInputWithoutLabel -->
+                    <input type="text" name="motd" value="{{motd}}" style="flex-grow: 1">
+                    <input type="submit" value="edit">
+                </form>
+                <form action="/admin/motd/{{index}}/delete">
+                    <input type="submit" value="delete">
+                </form>
+                <form action="/admin/motd/{{index}}/up">
+                    <input type="submit" value="up" {% if loop.first %} disabled {% endif %}>
+                </form>
+                <form action="/admin/motd/{{index}}/down">
+                    <input type="submit" value="down" {% if loop.last %} disabled {% endif %}>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
